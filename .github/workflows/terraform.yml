@@ -1,9 +1,13 @@
 name: Terraform Deploy
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types:
+      - closed
+    paths:
+      - "src/terraform/**"
 
 permissions:
   id-token: write      # Required for OIDC
@@ -11,12 +15,13 @@ permissions:
 
 jobs:
   terraform:
+    if: github.event.pull_request.merged == true
     name: Terraform on AWS via OIDC
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: terraform
+        working-directory: src/terraform
 
     steps:
       - name: Checkout Code
