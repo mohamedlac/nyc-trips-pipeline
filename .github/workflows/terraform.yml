@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-    types: [opened, reopened, closed]
+    types: [opened, synchronize, reopened, closed]
     paths:
       - "src/terraform/**"
 
