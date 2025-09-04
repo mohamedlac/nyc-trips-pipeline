@@ -26,3 +26,12 @@ tasks:
     generates:
       - artifacts/download_trip.zip
 
+  upload-lambda:
+    desc: "Upload the Lambda zip to S3"
+    deps: [ zip-lambda ] # ensures zip is created first
+    vars:
+      BUCKET: 4e3c594f-nyc-trips
+      KEY: lambdas/download_trip.zip
+    cmds:
+      - aws s3 cp artifacts/download_trip.zip s3://{{.BUCKET}}/{{.KEY}}
+
