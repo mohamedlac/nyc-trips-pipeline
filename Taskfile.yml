@@ -15,3 +15,14 @@ tasks:
         export AWS_SECRET_ACCESS_KEY=$(echo "$CREDS" | jq -r '.Credentials.SecretAccessKey')
         export AWS_SESSION_TOKEN=$(echo "$CREDS" | jq -r '.Credentials.SessionToken')
         echo "AWS credentials exported for 1 hour"
+        
+  zip-lambda:
+    desc: "Zip the Lambda handler into artifacts/download_trip.zip"
+    cmds:
+      - mkdir -p artifacts
+      - zip -r artifacts/download_trip.zip src/lambdas/download_trip/*
+    sources:
+      - src/lambdas/download_trip/**
+    generates:
+      - artifacts/download_trip.zip
+
