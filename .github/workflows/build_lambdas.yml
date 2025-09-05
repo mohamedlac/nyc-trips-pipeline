@@ -7,6 +7,10 @@ on:
     paths:
       - "src/lambdas/download_trip/**"
 
+permissions:
+  id-token: write      # Required for OIDC
+  contents: read       # Required to checkout the repo
+
 jobs:
   build:
     runs-on: ubuntu-latest
